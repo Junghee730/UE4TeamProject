@@ -138,3 +138,24 @@ void AUE4ProjectCharacter::MoveRight(float Value)
 		AddMovementInput(Direction, Value);
 	}
 }
+
+void AUE4ProjectCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	//playerGISS = UGameInstance::GetSubsystem<UPlayerGameInstanceSubsystem>(GetWorld()->GetGameInstance());
+	playerGISS = GetGameInstance()->GetSubsystem<UPlayerGameInstanceSubsystem>(GetWorld()->GetGameInstance());
+}
+
+void AUE4ProjectCharacter::Crash(int32 monsterPower)
+{
+	if (playerGISS->playerPower <= monsterPower)
+	{
+		playerGISS->playerPower = 0;
+		//체력바도 삭제 시켜줘야함!
+	}
+	else
+	{
+		playerGISS->playerPower -= monsterPower;
+	}
+}

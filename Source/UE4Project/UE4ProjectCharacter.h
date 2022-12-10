@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "PlayerGameInstanceSubsystem.h"
 #include "UE4ProjectCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -68,5 +69,17 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	//¹Ú¿¬Áö Ãß°¡
+protected:
+	virtual void BeginPlay() override;
+
+public:
+	UFUNCTION(BlueprintCallable)
+	void Crash(int32 monsterPower); //ºÎµúÃÆÀ» ¶§
+
+private:
+	UPROPERTY()
+	UPlayerGameInstanceSubsystem* playerGISS;
 };
 
